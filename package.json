@@ -1,0 +1,11 @@
+{
+  "name": "booksearch",
+  "version": "1.0.0",
+  "description": "web servise for search books using google Google",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ekaterina Volynshchikova",
+  "license": "ISC"
+}
