@@ -1,3 +1,143 @@
-.header {
-    color: red;
+:root {
+    --white-color: #fff;
+    --light-color: #f5f4f0;
+    --light-grey-color: #d7ccc0;
+    --dark-grey-color: #908d8b;
+    --primary-dark-color: #42413c;
+    --dark-color: #2a2626;
+    --brown-color: #b09a81;
+    --primary-orange-color: #fe8a02;
+    --primary-orange-active: #ea7600;
+    --blue-orange-color: #1085c5;
+  }
+
+@font-face {
+  font-family: neucha, sans-serif;
+  src: url("https://fonts.googleapis.com/css2?family=neucha&family=Open+Sans:wght@300&display=swap");
+}
+
+body {
+    font-family: neucha, sans-serif;
+    margin: 0;
+}
+
+.search-header {
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+    // margin: auto;
+    background-image: url('/src/static/back.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.search-header {
+    padding: 3% 10% 3%;
+    box-sizing: border-box;
+
+    h1 {
+        font-weight: 700;
+        color: var(--dark-grey-color);
+    }
+}
+
+input {
+    height: 2em;
+}
+
+.mainInput {
+    position: 'absolute';
+    overflow: 'hidden';
+    clip: 'rect(0, 0, 0, 0)';
+}
+
+.main-content {
+    position: relative;
+    margin: auto;
+    width: 70%;
+  }
+
+.books-container {
+    display: grid;
+    // grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    // justify-items: center; /* горизонтальное выравнивание */
+    // align-items: center;
+}
+
+.each-book {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Горизонтальное выравнивание */
+    align-items: center; /* Вертикальное выравнивание */
+    height: 100%; /* Установите желаемую высоту для ячейки */
+    background: var(--light-color);
+    padding: 10%;
+    box-sizing: border-box;
+
+    &:hover {
+        background: var(--white-color);
+
+        .img-book {
+            transform: scale(1.05)
+        }
+    }
+}
+
+.img-book {
+    // background: red;
+    height: 100%;
+}
+
+.description-book {
+    // background: blue;
+    height: 100%;
+    width: 100%;
+    margin-top: 15px;
+    text-overflow: ellipsis;
+    flex: 1;
+    // overflow: hidden;
+    // text-overflow: ellipsis;
+}
+
+@mixin subtitle {
+    // display: block;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--primary-dark-color);
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Количество строк */
+    overflow: hidden;
+}
+
+.book-title {
+    display: block;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--dark-color);
+    margin-top: 15px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Количество строк */
+    overflow: hidden;    
+}
+
+.book-categiry {
+    @include subtitle;
+    text-decoration: underline;
+}
+
+.book-authors {
+    @include subtitle;
+    margin-top: 5px;
+}
+
+.img-shadow {
+    box-shadow: 0 16px 32px rgba(0 0 0 / 20%);
 }

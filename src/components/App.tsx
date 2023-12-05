@@ -1,5 +1,9 @@
 import React from 'react'
+import {
+  BrowserRouter, Routes, Route
+} from 'react-router-dom'
 import SearchHeader from './SearchHeader'
+import SelectedBook from './SelectedBook'
 import SearchResuits from './SearchResults'
 import { Provider } from 'react-redux'
 import store from '../redux/store'
@@ -11,10 +15,17 @@ import store from '../redux/store'
 const App: React.FC = () => {
   return (
         <div>
+          <BrowserRouter>
             <Provider store={store}>
-             <SearchHeader />
-             <SearchResuits />
+              <SearchHeader />
+              <Routes>
+                <Route path="/search" element={<SearchResuits />} />
+                <Route path="/book" element={<SelectedBook />} />
+                <Route path="*" element={<SearchResuits />} />
+              </Routes>
+              {/* <SearchResuits /> */}
             </Provider>
+          </BrowserRouter>
         </div>
   )
 }

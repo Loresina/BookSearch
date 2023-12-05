@@ -39,7 +39,7 @@ const SearchHeader: React.FC = () => {
           const { totalItems, items } = response.data
 
           console.log(response)
-          console.log(items)
+          // console.log(items)
           if (totalItems > 0) {
             const bookItems = normResponse(items)
             dispatch(seachResult({ count: totalItems, booksInfo: bookItems, searchParams: { ...values, loadStartIndex: 0 } }))
@@ -52,46 +52,51 @@ const SearchHeader: React.FC = () => {
   })
 
   return (
-    <div>
-      <div>
-      <h1 className="header">Search for books</h1>
-      </div>
+    <div className='main-content'>
+      <div className='search-header'>
+        <div className='seach-title'>
+          <h1>Search for books</h1>
+          <div>
+            <form onSubmit={formik.handleSubmit}>
+              <div>
+                <label htmlFor="seachTitle">начните поиск книг</label>
+                <input
+                className='mainInput'
+                id="seachTitle"
+                name="seachTitle"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.seachTitle}
+                ref={inputFocus}
+                placeholder="Введите название книги"/>
+              </div>
 
-      <div>
-      <form onSubmit={formik.handleSubmit}>
+              <div>
+                <label htmlFor="categories">Categories</label>
+                <input
+                id="categories"
+                name="categories"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.categories}
+                />
+              </div>
 
-      <div>
-      <label htmlFor="seachTitle"
-      style={{ position: 'absolute', overflow: 'hidden', clip: 'rect(0, 0, 0, 0)' }}>Enter the title</label>
-      <input
-      id="seachTitle"
-      name="seachTitle"
-      type="text"
-      onChange={formik.handleChange}
-      value={formik.values.seachTitle}
-      ref={inputFocus}/>
-      </div>
+              <div>
+                <label htmlFor="sorting">Sorting by</label>
+                <input
+                id="sorting"
+                name="sorting"
+                type="sorting"
+                onChange={formik.handleChange}
+                value={formik.values.sorting}
+                />
+              </div>
 
-    <label htmlFor="categories">Categories</label>
-    <input
-      id="categories"
-      name="categories"
-      type="text"
-      onChange={formik.handleChange}
-      value={formik.values.categories}
-    />
-    <label htmlFor="sorting">Sorting by</label>
-    <input
-      id="sorting"
-      name="sorting"
-      type="sorting"
-      onChange={formik.handleChange}
-      value={formik.values.sorting}
-    />
-    <button type="submit">Submit</button>
-    <div>
-</div>
-  </form>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   )

@@ -7,6 +7,7 @@ import axios from 'axios'
 import apiPath from '../routes/routes'
 import normResponse from '../normData/normResponse'
 import { seachResult } from '../redux/seachAction'
+import img from '../static/content.png'
 
 const SearchResults: React.FC = () => {
   const searchData = useSelector(selectSearchData)
@@ -44,14 +45,23 @@ const SearchResults: React.FC = () => {
   const searchResultRender = (booksInfo: StateBookInfo[]): React.ReactElement => {
     console.log('привет вам', searchData.booksInfo.length)
     return (
-            <div>
+            <div className='books-container'>
                 {booksInfo.map((book: StateBookInfo, keyB) => {
                   return (
-                        <div key={keyB}>
-                            <h3>{book.title}</h3>
-                            <h4>{`Это первая категория книи ${book.categories[0]}`}</h4>
-                            <h4>{`Это автор ${book.authors[0]}`}</h4>
-                            {book.imageLinks.smallThumbnail.length > 0 ? <img src={book.imageLinks.smallThumbnail}/> : null}
+                        <div key={keyB} className='each-book'>
+
+                          <div className='img-book'>
+                          {book.imageLinks.smallThumbnail.length > 0
+                            ? <img src={book.imageLinks.smallThumbnail} className='img-shadow' />
+                            : <img src={img} className='img-shadow' />}
+                          </div>
+
+                          <div className='description-book'>
+                          <span className='book-categiry'>{book.categories[0]}</span>
+                          <span className='book-title'>{book.title}</span>
+                          <span className='book-authors'>{book.authors}</span>
+                          </div>
+
                         </div>
                   )
                 })}
@@ -60,10 +70,9 @@ const SearchResults: React.FC = () => {
   }
 
   return (
-        <div>
+        <div className="main-content">
         <h3>{searchData !== null ? `foudn ${searchData.count} books` : 'начните поиск'}</h3>
         {searchData.count > 0 ? searchResultRender(searchData.booksInfo) : null}
-
         <button onClick={loading}>previos page</button>
         <button onClick={loading}>load more</button>
 

@@ -8,6 +8,14 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
   },
+  devServer: {
+    historyApiFallback: true,
+    static: {
+     directory: path.join(__dirname, "/"),
+   },
+    port: 8080,
+    open: true
+  },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
     modules: [path.join(__dirname, 'src'), 'node_modules'],
@@ -20,7 +28,7 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: {
+        use: { 
           loader: 'ts-loader',
         },
       },
@@ -31,6 +39,19 @@ module.exports = {
           loader: 'babel-loader',
         },
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        exclude: /node_modules/,
+        type: 'asset/resource'
+        
+      },
+      // {
+      //   test: /\.(png|jpe?g|gif)$/i,
+      //   exclude: /node_modules/,
+      //   use: {
+      //     loader: 'url-loader',
+      //   },
+      // },
       {
         test: /\.css$/,
         use: [
