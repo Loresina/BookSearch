@@ -1,11 +1,11 @@
 ### Description
 
-**Book Search** еhis is online book search service.
+**Search for books** this is online book search service.
 The service uses Google Books APIs.
 * you can search for books by the keyword in the title
 * you can use filters to search for books
 
-### under development now
+** ...under development now... **
 
 ### How you can use it
 
