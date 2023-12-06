@@ -11,7 +11,7 @@ const normResponse = (items: RespItem[]): StateBookInfo[] => {
       const сurrentСategories = typeof categories === 'undefined' ? ['нет катогорий'] : categories
       const сurrentImageLinks = typeof imageLinks === 'undefined' ? { smallThumbnail: '', thumbnail: '' } : imageLinks
 
-      console.log(currentTitle)
+      // console.log(currentTitle)
 
       return {
         categories: сurrentСategories,
