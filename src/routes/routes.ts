@@ -1,5 +1,7 @@
 const key = process.env.KEY
 
+console.log('Я ключ', process.env.KEY)
+
 // const apiPath = (seachTitle: string, category: string, sorting: string ) => {
 //     return `https://www.googleapis.com/books/v1/volumes?q=intitle:${seachTitle}+subject:${category}
 //     &orderBy=relevance&startIndex=0&maxResults=30&key=${key}`
