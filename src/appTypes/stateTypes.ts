@@ -8,6 +8,7 @@ import { type StateBookInfo, type SearchParams } from './appTypes'
 
 export interface SeachState {
   count: number
+  mainMessage: string
   booksInfo: StateBookInfo[]
   searchParams: SearchParams
 }

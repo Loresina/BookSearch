@@ -14,6 +14,11 @@ const SearchHeader: React.FC = () => {
   const inputFocus = useRef<HTMLInputElement>(null)
   const dispatch = useDispatch()
 
+  // const [messageNotFound, setFound] = useState('')
+
+  const allCategories = ['all', 'art', 'biography', 'computers', 'history', 'medical', 'poetry']
+  const allSorting = ['relevance', 'newest']
+
   useEffect(() => {
     if (inputFocus.current !== null) {
       inputFocus.current.focus()
@@ -33,20 +38,20 @@ const SearchHeader: React.FC = () => {
     //     .required(t('required')),
     // }),
     onSubmit: (values) => {
-      // здесь должен происходить запрос на API с нужныит данными
       axios.get(apiPath(values.seachTitle, values.categories, values.sorting, 0))
         .then(response => {
           const { totalItems, items } = response.data
 
-          console.log(response)
-          // console.log(items)
           if (totalItems > 0) {
             const bookItems = normResponse(items)
-            dispatch(seachResult({ count: totalItems, booksInfo: bookItems, searchParams: { ...values, loadStartIndex: 0 } }))
+            dispatch(seachResult({ count: totalItems, mainMessage: '', booksInfo: bookItems, searchParams: { ...values, loadStartIndex: 0 } }))
+          } else {
+            console.log('я тут')
+            dispatch(seachResult({ count: totalItems, mainMessage: 'по вашему запросу ничего не найдено', booksInfo: [], searchParams: { ...values, loadStartIndex: 0 } }))
           }
         })
         .catch(error => {
-          console.error('Ято-то пошло не так', error)
+          console.error('Что-то пошло не так', error)
         })
     }
   })
@@ -56,12 +61,16 @@ const SearchHeader: React.FC = () => {
       <div className='search-header'>
         <div className='seach-title'>
           <h1>Search for books</h1>
-          <div>
+          <div className='form'>
             <form onSubmit={formik.handleSubmit}>
-              <div>
-                <label htmlFor="seachTitle">начните поиск книг</label>
+              <div className='main-form'>
+              <button type="submit" className='submit-button'>
+              <svg className="navigation-icon" width="20" height="19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="m19.026 17.05-3.71-3.7c1.002-1.3 1.704-3 1.704-4.9 0-4.4-3.61-8-8.023-8C4.585.45.975 4.15.975 8.55c0 4.4 3.61 8 8.022 8 1.805 0 3.51-.6 4.914-1.7l3.71 3.7 1.405-1.5Zm-10.029-2.5c-3.309 0-6.017-2.7-6.017-6s2.708-6 6.017-6c3.31 0 6.017 2.7 6.017 6s-2.707 6-6.017 6Z" fill="#000"/>
+              </svg>
+              </button>
+              <label htmlFor="seachTitle">начните поиск книг</label>
                 <input
-                className='mainInput'
                 id="seachTitle"
                 name="seachTitle"
                 type="text"
@@ -71,29 +80,34 @@ const SearchHeader: React.FC = () => {
                 placeholder="Введите название книги"/>
               </div>
 
-              <div>
-                <label htmlFor="categories">Categories</label>
-                <input
-                id="categories"
-                name="categories"
-                type="text"
-                onChange={formik.handleChange}
-                value={formik.values.categories}
-                />
-              </div>
+                <div className='filters-inputs'>
+                  <div className='filters-item'>
+                  <label htmlFor="categories">Categories</label>
+                  <select
+                  className='sub-input'
+                  id="categories"
+                  name="categories"
+                  onChange={formik.handleChange}
+                  value={formik.values.categories}
+                  >
+                    {allCategories.map((category: string, key) => <option key={key} value={category}>{category}</option>)}
+                  </select>
+                  </div>
 
-              <div>
-                <label htmlFor="sorting">Sorting by</label>
-                <input
-                id="sorting"
-                name="sorting"
-                type="sorting"
-                onChange={formik.handleChange}
-                value={formik.values.sorting}
-                />
-              </div>
-
-              <button type="submit">Submit</button>
+                  <div className='filters-item'>
+                  <label htmlFor="sorting">Sorting by</label>
+                  <select
+                  className='sub-input'
+                  id="sorting"
+                  name="sorting"
+                  onChange={formik.handleChange}
+                  value={formik.values.sorting}
+                  placeholder="тип отображения"
+                  >
+                    {allSorting.map((sorting: string, key) => <option key={key} value={sorting}>{sorting}</option>)}
+                  </select>
+                  </div>
+                </div>
             </form>
           </div>
         </div>

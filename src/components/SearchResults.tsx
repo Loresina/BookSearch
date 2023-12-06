@@ -14,7 +14,7 @@ const SearchResults: React.FC = () => {
   const dispatch = useDispatch()
 
   const loading = (): void => {
-    console.log('Загружаю следующую партию')
+    // console.log('Загружаю следующую партию')
     const actuaStartIndex = searchData.searchParams.loadStartIndex + 32
 
     // const startIndex = actuaStartIndex > searchData.count ? searchData.count - (actuaStartIndex - searchData.count) : actuaStartIndex
@@ -25,25 +25,24 @@ const SearchResults: React.FC = () => {
       searchData.searchParams.sorting, actuaStartIndex))
       .then(response => {
         const { totalItems, items } = response.data
-
-        console.log('Всего книг найдено', totalItems)
-
+        // console.log('Всего книг найдено', totalItems)
         // console.log(items)
         const bookItems = normResponse(items)
 
         dispatch(seachResult({
           count: totalItems,
+          mainMessage: '',
           booksInfo: bookItems,
           searchParams: { ...searchData.searchParams, loadStartIndex: actuaStartIndex }
         }))
 
-        console.log(searchData.searchParams)
+        // console.log(searchData.searchParams)
       })
       .catch((e) => { console.log(e) })
   }
 
   const searchResultRender = (booksInfo: StateBookInfo[]): React.ReactElement => {
-    console.log('привет вам', searchData.booksInfo.length)
+    // console.log('привет вам', searchData.booksInfo.length)
     return (
             <div className='books-container'>
                 {booksInfo.map((book: StateBookInfo, keyB) => {
@@ -61,20 +60,25 @@ const SearchResults: React.FC = () => {
                           <span className='book-title'>{book.title}</span>
                           <span className='book-authors'>{book.authors}</span>
                           </div>
-
                         </div>
                   )
                 })}
-            </div>
+
+                <div className='footer'>
+                  <button onClick={loading}>previos page</button>
+                  <button onClick={loading}>load more</button>
+                  </div>
+                </div>
     )
   }
 
   return (
-        <div className="main-content">
-        <h3>{searchData !== null ? `foudn ${searchData.count} books` : 'начните поиск'}</h3>
-        {searchData.count > 0 ? searchResultRender(searchData.booksInfo) : null}
-        <button onClick={loading}>previos page</button>
-        <button onClick={loading}>load more</button>
+    <div className="main-content">
+      <div className='seach-result'>
+      <span>{searchData.count !== 0 ? `foudn ${searchData.count} books` : searchData.mainMessage}</span>
+      </div>
+
+      {searchData.count > 0 ? searchResultRender(searchData.booksInfo) : null}
 
     </div>
   )

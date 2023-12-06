@@ -4,6 +4,7 @@ import type { UserActions } from './seachAction'
 
 const initialState: SeachState = {
   count: 0,
+  mainMessage: 'начнте поиск книг',
   booksInfo: [{
     title: '',
     authors: [],

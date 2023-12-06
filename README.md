@@ -1,6 +1,6 @@
 ### Description
 
-**Search for books** this is online book search service.
+**Search for books** is online book search service.
 The service uses Google Books APIs.
 * you can search for books by the keyword in the title
 * you can use filters to search for books
@@ -14,5 +14,3 @@ The service uses Google Books APIs.
 
 <!-- ### Maintability: -->
 <!-- <a href="https://codeclimate.com/github/Loresina/frontend-bootcamp-project-12/maintainability"><img src="https://api.codeclimate.com/v1/badges/646791e2f2e9841fdf30/maintainability" /></a> -->
-
-
