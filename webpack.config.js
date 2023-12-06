@@ -1,8 +1,9 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-// const Dotenv = require('dotenv-webpack');
+const Dotenv = require('dotenv-webpack');
 
 const webpack = require('webpack')
+const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
   entry: './src/index.tsx',
@@ -75,7 +76,8 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: './src/index.html',
     }),
-    // new Dotenv(),
+    !isProduction ? 
+    new Dotenv() :
     new webpack.DefinePlugin({
       // 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.KEY': JSON.stringify(process.env.KEY),
