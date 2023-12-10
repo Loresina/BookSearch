@@ -46,7 +46,6 @@ const SearchHeader: React.FC = () => {
             const bookItems = normResponse(items)
             dispatch(seachResult({ count: totalItems, mainMessage: '', booksInfo: bookItems, searchParams: { ...values, loadStartIndex: 0 } }))
           } else {
-            console.log('я тут')
             dispatch(seachResult({ count: totalItems, mainMessage: 'по вашему запросу ничего не найдено', booksInfo: [], searchParams: { ...values, loadStartIndex: 0 } }))
           }
         })

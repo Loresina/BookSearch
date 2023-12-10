@@ -1,0 +1,11 @@
+version: '2'
+services:
+  booksearch:
+    build: .
+    container_name: client_frontend
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./src:/app/src
+    # stdin_open: true
+    # tty: true
