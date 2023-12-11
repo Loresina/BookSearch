@@ -6,9 +6,6 @@ The service uses Google Books APIs.
 * you can use filters to search for books
 
 **...under development now...**
-
-### How you can use it
-
 <code>You can follow the link and try to use [Book Search](https://book-seach.vercel.app/)
 </code>
 
